@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="alert-msg">
+        {% if messages %} 
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}}" role="alert">
+            <span>{{message}}</span>
+        </div>
+        {% endfor %}
+        {% endif %}    
+    </div>
+    <section>
+        <div class="container">
+            {% if user.isAuthenticated %}
+            <h1>Welcome, {{request.User.first_name}}</h1>
+            {% else %}
+            <h1>Welcome To dashboard</h1>
+            {% endif %}
+            <a href="{% url 'meeting' %}">New Meeting</a>
+            <a href="{% url 'join_room' %}">Join Meeting</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </section>
+</body>
+</html>
